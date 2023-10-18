@@ -1,0 +1,42 @@
+@baseUrl = http://localhost:3333
+@AuthToken = {{authenticate.response.body.access_token}}
+
+# @name create_account
+POST {{baseUrl}}/accounts
+Content-Type: application/json
+
+{
+  "name": "raimones",
+  "email": "rai@email.com",
+  "password": "12345678"
+}
+
+###
+
+# @name authenticate
+POST {{baseUrl}}/sessions
+Content-Type: application/json
+
+{
+  "email": "rai@email.com",
+  "password": "12345678"
+}
+
+###
+
+# @name create_task
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+Authorization: Bearer {{AuthToken}}
+
+{
+  "content": "Passear com o cachorro",
+  "checked": false
+}
+
+###
+
+# @name get_task
+GET {{baseUrl}}/tasks
+Content-Type: application/json
+Authorization: Bearer {{AuthToken}}
