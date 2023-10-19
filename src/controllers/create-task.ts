@@ -5,6 +5,7 @@ import { Token } from "src/auth/jwt.strategy";
 import { ZodValidationPipe } from "src/pipes/zod-validation.pipes";
 import { PrismaService } from "src/prisma/prisma.service";
 import { z } from "zod";
+import { getAllTasks } from "./fetch-tasks";
 
 const createTaskBodySchema = z.object({
   content: z.string().min(1),
@@ -35,5 +36,9 @@ export class CreateTaskController {
         userId,
       },
     });
+
+    const tasks = await getAllTasks(userId, this.prisma);
+
+    return tasks;
   }
 }

@@ -30,7 +30,7 @@ Content-Type: application/json
 Authorization: Bearer {{AuthToken}}
 
 {
-  "content": "Passear com o cachorro",
+  "content": "Finalizar a aplicação",
   "checked": false
 }
 
@@ -38,5 +38,19 @@ Authorization: Bearer {{AuthToken}}
 
 # @name get_task
 GET {{baseUrl}}/tasks
+Content-Type: application/json
+Authorization: Bearer {{AuthToken}}
+
+###
+
+# @name change_checked_task
+PATCH {{baseUrl}}/tasks/db83a010-0071-4bac-9080-a78e133d4046
+Content-Type: application/json
+Authorization: Bearer {{AuthToken}}
+
+###
+
+# @name delete_task
+DELETE {{baseUrl}}/tasks/db83a010-0071-4bac-9080-a78e133d4046
 Content-Type: application/json
 Authorization: Bearer {{AuthToken}}

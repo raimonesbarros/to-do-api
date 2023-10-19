@@ -6,6 +6,7 @@ import { AuthenticateController } from "./controllers/authenticate";
 import { CreateAccountController } from "./controllers/create-account";
 import { CreateTaskController } from "./controllers/create-task";
 import { FetchTaskController } from "./controllers/fetch-tasks";
+import { ModifyTaskController } from "./controllers/modify-task";
 import { PrismaService } from "./prisma/prisma.service";
 
 @Module({
@@ -21,6 +22,7 @@ import { PrismaService } from "./prisma/prisma.service";
     AuthenticateController,
     CreateTaskController,
     FetchTaskController,
+    ModifyTaskController,
   ],
   providers: [PrismaService],
 })

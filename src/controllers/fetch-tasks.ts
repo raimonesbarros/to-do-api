@@ -13,29 +13,37 @@ export class FetchTaskController {
   async handle(@CurrentUser() user: Token) {
     const userId = user.sub;
 
-    const notChecked = await this.prisma.task.findMany({
-      where: {
-        checked: false,
-      },
-    });
+    const tasks = await getAllTasks(userId, this.prisma);
 
-    const checked = await this.prisma.task.findMany({
-      where: {
-        checked: true,
-      },
-    });
-
-    const total = notChecked.length + checked.length;
-
-    const totalChecked = checked.length;
-
-    return {
-      tasks: {
-        not_checked: notChecked,
-        checked,
-      },
-      total,
-      checked: totalChecked,
-    };
+    return tasks;
   }
 }
+
+export const getAllTasks = async (userId: string, prisma: PrismaService) => {
+  const notChecked = await prisma.task.findMany({
+    where: {
+      userId,
+      checked: false,
+    },
+  });
+
+  const checked = await prisma.task.findMany({
+    where: {
+      userId,
+      checked: true,
+    },
+  });
+
+  const total = notChecked.length + checked.length;
+
+  const totalChecked = checked.length;
+
+  return {
+    tasks: {
+      not_checked: notChecked,
+      checked,
+    },
+    total,
+    checked: totalChecked,
+  };
+};
