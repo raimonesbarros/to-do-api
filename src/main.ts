@@ -8,6 +8,14 @@ async function bootstrap() {
     // logger: false,
   });
 
+  const corsOptions = {
+    origin: "*",
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  };
+
+  app.enableCors(corsOptions);
+
   const configService = app.get<ConfigService<Env, true>>(ConfigService);
   const PORT = configService.get("PORT", { infer: true });
 
